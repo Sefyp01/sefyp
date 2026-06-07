@@ -431,7 +431,14 @@ input::placeholder { color: #AAAAAA; }
         <div class="chk-item"><input type="checkbox" id="chk1"><label for="chk1">Autorizo a SEFYP a usar mis datos personales para tramitar mi solicitud de crédito.</label></div>
         <div class="chk-item"><input type="checkbox" id="chk2"><label for="chk2">Confirmo que la información proporcionada es verdadera y me pertenece.</label></div>
 
-        <button class="btn-wa-send" id="btnEnv">📲 Enviar mi solicitud por WhatsApp</button>
+        <div style="background:#E8F5EE;border:2px solid #007A6E;border-radius:12px;padding:16px;margin-bottom:14px;font-size:14px;color:#005A52;font-weight:700;line-height:1.7;">
+  <div style="font-family:Montserrat,sans-serif;font-size:15px;font-weight:900;margin-bottom:8px;">📸 Paso importante antes de enviar:</div>
+  1️⃣ Toca el botón verde de abajo<br>
+  2️⃣ Se abrirá WhatsApp con tus datos<br>
+  3️⃣ <strong>Adjunta las fotos de tu INE</strong> (toca el clip 📎 en WhatsApp)<br>
+  4️⃣ Toca Enviar ✅
+</div>
+<button class="btn-wa-send" id="btnEnv">📲 Abrir WhatsApp y enviar mi solicitud</button>
 
         <div class="docs-aviso">
           <strong>📸 Documentos adicionales que pediremos después:</strong>
@@ -453,9 +460,17 @@ input::placeholder { color: #AAAAAA; }
         <div class="folio-lbl">Tu número de folio es</div>
         <div class="folio-num" id="folioNum">PM00000</div>
       </div>
+      <div style="background:#FEF3E2;border:2px solid #F5A623;border-radius:12px;padding:16px;margin-bottom:14px;font-size:14px;color:#7A4F00;font-weight:700;line-height:1.7;text-align:left;">
+        <div style="font-family:Montserrat,sans-serif;font-size:15px;font-weight:900;margin-bottom:8px;">⚠️ Acción requerida ahora:</div>
+        En WhatsApp que se acaba de abrir:<br>
+        📎 Toca el clip para adjuntar archivos<br>
+        📷 Adjunta la foto del <strong>frente de tu INE</strong><br>
+        📷 Adjunta la foto del <strong>reverso de tu INE</strong><br>
+        ✅ Toca <strong>Enviar</strong>
+      </div>
       <div class="ok-steps">
-        ¿Qué sigue?<br>
-        1️⃣ Revisa tu correo — te enviaremos un código de confirmación<br>
+        ¿Qué sigue después?<br>
+        1️⃣ Revisa tu correo — recibirás un código de confirmación<br>
         2️⃣ Un asesor te contactará por WhatsApp en 24–48 hrs<br>
         3️⃣ Te pediremos los documentos restantes<br>
         4️⃣ Si calificas, ¡recibes tu crédito!
@@ -577,36 +592,4 @@ const TIPOS = { activo_sind:'Trabajador Activo Sindicalizado', activo_conf:'Trab
 
 document.getElementById('btnEnv').addEventListener('click', function(){
   if(!document.getElementById('chk1').checked||!document.getElementById('chk2').checked){
-    alert('⚠️ Por favor marca las dos casillas antes de enviar.');return;
-  }
-  if(!ineFiles.frente||!ineFiles.reverso){
-    alert('⚠️ Por favor sube las fotos de tu INE (frente y reverso).');return;
-  }
-
-  const folio = 'PM'+Math.floor(Math.random()*90000+10000);
-  const msg =
-    '🏦 *SOLICITUD DE CRÉDITO SEFYP*\n'+
-    '📋 Folio: *'+folio+'*\n\n'+
-    '👷 *Tipo:* '+(TIPOS[tipoSel]||tipoSel)+'\n'+
-    '🏦 *Banco:* '+bancoSel+'\n\n'+
-    '📋 *DATOS PERSONALES*\n'+
-    '• Nombre: '+g('f_nombre')+'\n'+
-    '• Ficha PEMEX: '+g('f_ficha')+'\n'+
-    '• Clave ASISTE: '+g('f_asiste')+'\n'+
-    '• Correo: '+g('f_correo')+'\n'+
-    '• Teléfono: '+g('f_tel')+'\n\n'+
-    '🪪 *INE:* Adjunto frente y reverso\n\n'+
-    '✅ Autoriza uso de datos para trámite de crédito.\n'+
-    '📅 '+new Date().toLocaleString('es-MX');
-
-  const url = 'https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(msg);
-  window.open(url, '_blank');
-
-  document.getElementById('s3').classList.remove('on');
-  document.getElementById('okScreen').classList.add('on');
-  document.getElementById('folioNum').textContent = folio;
-  window.scrollTo({top:0,behavior:'smooth'});
-});
-</script>
-</body>
-</html>
+    alert('⚠️ Por favor marca las do
