@@ -220,7 +220,7 @@ input::placeholder { color: #AAAAAA; }
         <div class="nav-logo-sub">Crédito Personal PEMEX</div>
       </div>
     </div>
-    <button class="nav-btn" id="navBtn">Solicitar ahora →</button>
+    <button class="nav-btn" id="navBtn" onclick="showForm();return false;">Solicitar ahora →</button>
   </nav>
 
   <div class="hero">
@@ -229,7 +229,7 @@ input::placeholder { color: #AAAAAA; }
       <h1>Tu crédito personal<br><span>para trabajadores y jubilados PEMEX</span></h1>
       <p class="hero-sub">Trabajadores activos, jubilados y post mortem. Trámite rápido, sin aval y con trámite rápido y sin aval.</p>
       <div class="hero-btns">
-        <button class="btn-amarillo" id="heroBtn">📋 Iniciar mi solicitud</button>
+        <button class="btn-amarillo" id="heroBtn" onclick="showForm();return false;">📋 Iniciar mi solicitud</button>
         <a href="#segmentos" class="btn-outline">¿Quién puede solicitar?</a>
       </div>
       <div class="hero-trust">
@@ -305,7 +305,7 @@ input::placeholder { color: #AAAAAA; }
   <div class="cta-bg">
     <h2>¿Listo para solicitar tu crédito?</h2>
     <p>El proceso toma solo 5 minutos. Sin salir de casa.</p>
-    <button class="btn-amarillo" id="ctaBtn" style="font-size:17px;padding:18px 44px;">📋 Iniciar mi solicitud ahora</button>
+    <button class="btn-amarillo" id="ctaBtn" onclick="showForm();return false;" style="font-size:17px;padding:18px 44px;">📋 Iniciar mi solicitud ahora</button>
     <p style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:14px">🔒 Tus datos están protegidos y son 100% confidenciales</p>
   </div>
 
@@ -320,7 +320,7 @@ input::placeholder { color: #AAAAAA; }
 <!-- ═══════════ FORMULARIO ═══════════ -->
 <div class="pg" id="pgForm">
   <div class="form-top">
-    <button class="btn-volver" id="btnVolver">← Regresar</button>
+    <button class="btn-volver" id="btnVolver" onclick="showLanding();return false;">← Regresar</button>
     <div class="form-logo">SEFYP</div>
     <div class="form-sub">Solicitud de Crédito Personal PEMEX</div>
   </div>
@@ -482,6 +482,8 @@ input::placeholder { color: #AAAAAA; }
 </div>
 
 <script>
+window.showForm = showForm;
+window.showLanding = showLanding;
 const WA_NUM = '529934039984';
 const LABELS = ['','Tipo de trabajador y banco','Tus datos personales','Foto de tu INE y envío'];
 let paso = 1;
@@ -500,10 +502,33 @@ function showLanding() {
   document.getElementById('pgLanding').classList.add('on');
   window.scrollTo({top:0,behavior:'smooth'});
 }
-document.getElementById('navBtn').addEventListener('click', showForm);
-document.getElementById('heroBtn').addEventListener('click', showForm);
-document.getElementById('ctaBtn').addEventListener('click', showForm);
-document.getElementById('btnVolver').addEventListener('click', showLanding);
+// Botones con múltiples métodos para máxima compatibilidad
+function initButtons() {
+  var btns = ['navBtn','heroBtn','ctaBtn'];
+  btns.forEach(function(id) {
+    var el = document.getElementById(id);
+    if(el) {
+      el.onclick = function(e) { e.preventDefault(); showForm(); return false; };
+      el.addEventListener('click', function(e) { e.preventDefault(); showForm(); }, false);
+      el.setAttribute('onclick', 'showForm();return false;');
+    }
+  });
+  var volver = document.getElementById('btnVolver');
+  if(volver) {
+    volver.onclick = function(e) { e.preventDefault(); showLanding(); return false; };
+    volver.addEventListener('click', function(e) { e.preventDefault(); showLanding(); }, false);
+    volver.setAttribute('onclick', 'showLanding();return false;');
+  }
+}
+if(document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initButtons);
+} else {
+  initButtons();
+}
+
+
+
+
 
 // ── SEGMENTOS LANDING ──
 function selectSegmento(tipo) {
