@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEFYP — Crédito Nómina Jubilados PEMEX</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --azul: #004481;
+  --azul-mid: #1464A0;
+  --azul-light: #E8F1FA;
+  --celeste: #5BBEFF;
+  --celeste-light: #EBF7FF;
+  --gris: #F4F6F9;
+  --gris-mid: #E8ECF0;
+  --text: #1A1F2E;
+  --muted: #5A6270;
+  --border: #D0D8E4;
+  --surface: #FFFFFF;
+  --verde: #1A7A4A;
+  --verde-light: #E8F5EE;
+  --r: 14px;
+  --rsm: 8px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Nunito', sans-serif; background: var(--gris); color: var(--text); }
+
+.pg { display: none; }
+.pg.on { display: block; }
+
+/* ══ NAV ══ */
+.nav {
+  background: var(--azul);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 16px rgba(0,68,129,0.3);
+}
+.nav-logo { display: flex; align-items: center; gap: 12px; }
+.nav-mark {
+  width: 42px; height: 42px;
+  background: var(--celeste);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 900; color: var(--azul);
+}
+.nav-name { font-size: 20px; font-weight: 900; color: #fff; letter-spacing: 0.03em; }
+.nav-sub { font-size: 10px; color: rgba(255,255,255,0.55); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.nav-btn {
+  background: var(--celeste);
+  color: var(--azul);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900; font-size: 14px;
+  padding: 10px 22px; border-radius: 30px;
+  border: none; cursor: pointer;
+}
+
+/* ══ HERO ══ */
+.hero {
+  background: linear-gradient(160deg, #002850 0%, var(--azul) 50%, var(--azul-mid) 100%);
+  padding: 70px 24px 90px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: rgba(91,190,255,0.08);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -80px;
+  width: 350px; height: 350px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+}
+.hero-inner { max-width: 680px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+.hero-exclusivo {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(91,190,255,0.15);
+  border: 1px solid rgba(91,190,255,0.3);
+  border-radius: 30px;
+  padding: 6px 18px;
+  font-size: 13px; font-weight: 700;
+  color: var(--celeste);
+  margin-bottom: 24px;
+  letter-spacing: 0.05em;
+}
+.hero h1 {
+  font-size: clamp(28px, 6vw, 52px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.hero h1 span { color: var(--celeste); }
+.hero-sub {
+  font-size: clamp(15px, 2.5vw, 18px);
+  color: rgba(255,255,255,0.75);
+  line-height: 1.7;
+  margin-bottom: 36px;
+  max-width: 520px;
+  margin-left: auto; margin-right: auto;
+}
+
+/* MONTO HERO */
+.hero-monto {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(91,190,255,0.25);
+  border-radius: 20px;
+  padding: 24px 32px;
+  display: inline-block;
+  margin-bottom: 32px;
+}
+.hm-label { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+.hm-num { font-size: 56px; font-weight: 900; color: var(--celeste); line-height: 1; letter-spacing: -2px; }
+.hm-sub { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+.hero-btn {
+  background: var(--celeste);
+  color: var(--azul);
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px; font-weight: 900;
+  padding: 18px 44px;
+  border-radius: 50px; border: none; cursor: pointer;
+  box-shadow: 0 6px 24px rgba(91,190,255,0.35);
+  display: inline-block;
+  margin-bottom: 24px;
+}
+
+.hero-trust {
+  display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 700;
+  color: rgba(255,255,255,0.7);
+}
+.trust-item::before {
+  content: '✓';
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: rgba(91,190,255,0.25);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 10px; color: var(--celeste);
+}
+
+/* WAVE */
+.wave { display: block; width: 100%; line-height: 0; }
+
+/* REQUISITOS */
+.req-section { padding: 70px 24px; max-width: 900px; margin: 0 auto; }
+.sec-tag {
+  display: inline-block;
+  background: var(--azul-light);
+  color: var(--azul);
+  font-size: 11px; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 4px 14px; border-radius: 30px;
+  margin-bottom: 12px;
+}
+.sec-title { font-size: clamp(24px,4vw,38px); font-weight: 900; color: var(--azul); margin-bottom: 10px; line-height: 1.2; }
+.sec-sub { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 40px; max-width: 540px; }
+
+/* DOCUMENTOS */
+.docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 16px; margin-bottom: 40px; }
+.doc-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 22px;
+  display: flex; align-items: flex-start; gap: 16px;
+  transition: all 0.2s;
+  position: relative; overflow: hidden;
+}
+.doc-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--azul), var(--celeste));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+.doc-card:hover { border-color: var(--azul); transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,68,129,0.12); }
+.doc-card:hover::before { transform: scaleX(1); }
+.doc-icon-wrap {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: var(--azul-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; flex-shrink: 0;
+}
+.doc-content { flex: 1; }
+.doc-num {
+  font-size: 10px; font-weight: 800;
+  color: var(--azul); text-transform: uppercase;
+  letter-spacing: 0.1em; margin-bottom: 4px;
+  opacity: 0.6;
+}
+.doc-titulo { font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+.doc-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+/* QUIEN CALIFICA */
+.califica-bg { background: var(--azul); padding: 60px 24px; }
+.cal-inner { max-width: 900px; margin: 0 auto; }
+.cal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 36px; }
+@media(max-width:600px){ .cal-grid { grid-template-columns: 1fr; } }
+.cal-card {
+  border-radius: var(--r); padding: 24px;
+}
+.cal-card.si { background: rgba(91,190,255,0.12); border: 1.5px solid rgba(91,190,255,0.3); }
+.cal-card.no { background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.1); }
+.cal-title { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.cal-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.cal-list li { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.8); display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
+.cal-list li span { flex-shrink: 0; font-size: 16px; }
+
+/* PROCESO */
+.proceso-bg { background: var(--gris); padding: 70px 24px; }
+.proc-inner { max-width: 900px; margin: 0 auto; }
+.pasos { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 24px; margin-top: 40px; }
+.paso { text-align: center; }
+.paso-num {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--azul), var(--azul-mid));
+  color: #fff; font-size: 22px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px;
+  box-shadow: 0 4px 16px rgba(0,68,129,0.25);
+}
+.paso h3 { font-size: 15px; font-weight: 800; color: var(--azul); margin-bottom: 6px; }
+.paso p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+/* CTA */
+.cta-bg { background: linear-gradient(135deg, #002850, var(--azul)); padding: 70px 24px; text-align: center; }
+.cta-bg h2 { font-size: clamp(24px,4vw,40px); font-weight: 900; color: #fff; margin-bottom: 14px; }
+.cta-bg p { font-size: 17px; color: rgba(255,255,255,0.7); margin-bottom: 32px; }
+.cta-note { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 14px; }
+
+/* FOOTER */
+.footer { background: #001830; padding: 28px 24px; text-align: center; }
+.footer-logo { font-size: 22px; font-weight: 900; color: var(--celeste); margin-bottom: 6px; }
+.footer-txt { font-size: 12px; color: rgba(255,255,255,0.3); line-height: 1.6; }
+
+/* WA FLOAT */
+.wa-float {
+  position: fixed; bottom: 20px; right: 20px;
+  background: #25D366; border-radius: 50px;
+  padding: 12px 20px;
+  font-size: 15px; font-weight: 800; color: #fff;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+  z-index: 999;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* ══ FORMULARIO ══ */
+.form-top { background: var(--azul); padding: 16px 20px 20px; text-align: center; }
+.form-logo { font-size: 26px; font-weight: 900; color: var(--celeste); }
+.form-sub { color: rgba(255,255,255,0.7); font-size: 14px; margin-top: 4px; font-weight: 700; }
+.btn-volver {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff; font-family: 'Nunito', sans-serif;
+  font-size: 13px; font-weight: 700;
+  padding: 7px 16px; border-radius: 20px;
+  cursor: pointer; margin-bottom: 12px;
+}
+.prog-wrap { background: #002850; padding: 12px 20px; }
+.prog-label { color: rgba(255,255,255,0.9); font-size: 14px; font-weight: 800; text-align: center; margin-bottom: 6px; }
+.prog-bar { background: rgba(255,255,255,0.15); border-radius: 8px; height: 8px; overflow: hidden; }
+.prog-fill { height: 100%; background: var(--celeste); border-radius: 8px; transition: width .4s; }
+
+.form-wrap { max-width: 540px; margin: 0 auto; padding: 20px 16px 80px; }
+.scard { background: var(--surface); border-radius: 16px; box-shadow: 0 4px 24px rgba(0,68,129,0.10); overflow: hidden; display: none; margin-bottom: 16px; }
+.scard.on { display: block; animation: slideIn 0.3s ease; }
+@keyframes slideIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+.scard-head { background: linear-gradient(135deg, #002850, var(--azul)); padding: 22px 24px; }
+.scard-emo { font-size: 32px; display: block; margin-bottom: 6px; }
+.scard-num { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+.scard-tit { font-size: 20px; font-weight: 900; color: #fff; }
+.scard-body { padding: 24px; }
+
+.info-box { background: var(--azul-light); border-left: 4px solid var(--azul); border-radius: 0 8px 8px 0; padding: 14px 16px; margin-bottom: 20px; font-size: 14px; color: var(--azul); line-height: 1.6; font-weight: 700; }
+
+/* DOCS AVISO */
+.docs-aviso-form {
+  background: var(--celeste-light);
+  border: 2px solid var(--celeste);
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+.daf-title { font-size: 15px; font-weight: 900; color: var(--azul); margin-bottom: 12px; }
+.daf-list { display: flex; flex-direction: column; gap: 9px; }
+.daf-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; font-weight: 700; color: var(--azul-mid); line-height: 1.4; }
+.daf-num { width: 22px; height: 22px; border-radius: 50%; background: var(--azul); color: #fff; font-size: 11px; font-weight: 900; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+
+.fld { margin-bottom: 20px; }
+.fld label { display: block; font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+.req { color: #CC0000; }
+.hint { font-size: 12px; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
+input:not([type=checkbox]), select { width: 100%; padding: 14px 16px; border: 2px solid var(--border); border-radius: 10px; font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 700; color: var(--text); background: var(--gris); outline: none; -webkit-appearance: none; }
+input[type=checkbox] { width: 24px !important; height: 24px !important; min-width: 24px; padding: 0 !important; border: 2px solid var(--border) !important; border-radius: 4px !important; background: #fff !important; cursor: pointer; -webkit-appearance: checkbox !important; appearance: checkbox !important; accent-color: var(--azul); flex-shrink: 0; }
+input:focus, select:focus { border-color: var(--azul); background: #fff; box-shadow: 0 0 0 3px rgba(0,68,129,0.08); }
+input::placeholder { color: #AAAAAA; }
+select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%235A6270' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 40px; }
+
+.chk-item { display: flex; align-items: flex-start; gap: 12px; padding: 14px; background: var(--gris); border-radius: 10px; margin-bottom: 10px; }
+.chk-item input[type=checkbox] { width: 24px !important; height: 24px !important; min-width: 24px !important; flex-shrink: 0; accent-color: var(--azul); cursor: pointer; padding: 0 !important; -webkit-appearance: checkbox !important; appearance: checkbox !important; border-radius: 4px !important; background: #fff !important; }
+.chk-item label { font-size: 14px; font-weight: 700; color: var(--text); cursor: pointer; line-height: 1.5; }
+
+.nav-btns { display: flex; gap: 10px; margin-top: 12px; }
+.btn-sig { flex: 1; padding: 16px; background: var(--azul); color: #fff; border: none; border-radius: 10px; font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 900; cursor: pointer; }
+.btn-ant { padding: 16px 20px; background: var(--surface); border: 2px solid var(--border); border-radius: 10px; font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; color: var(--muted); }
+.btn-wa-send { width: 100%; padding: 20px; background: #25D366; color: #fff; border: none; border-radius: 10px; font-family: 'Nunito', sans-serif; font-size: 18px; font-weight: 900; cursor: pointer; box-shadow: 0 4px 16px rgba(37,211,102,0.3); margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+
+.resumen-box { background: var(--gris); border: 1.5px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 18px; font-size: 14px; line-height: 2.1; font-weight: 700; }
+
+.ok-screen { display: none; text-align: center; padding: 40px 20px; }
+.ok-screen.on { display: block; }
+.ok-emo { font-size: 72px; display: block; margin-bottom: 16px; }
+.ok-tit { font-size: 26px; font-weight: 900; color: var(--azul); margin-bottom: 10px; }
+.ok-sub { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+.folio-box { background: var(--azul); color: #fff; border-radius: 12px; padding: 22px; margin: 16px 0; }
+.folio-lbl { font-size: 12px; opacity: .6; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
+.folio-num { font-size: 36px; font-weight: 900; letter-spacing: 3px; color: var(--celeste); margin-top: 4px; }
+.ok-steps { background: var(--azul-light); border-radius: 12px; padding: 18px; text-align: left; font-size: 14px; color: var(--azul); line-height: 1.9; font-weight: 700; }
+.ok-wa-aviso { background: #E8F5EE; border: 2px solid #25D366; border-radius: 12px; padding: 16px; margin-bottom: 16px; font-size: 14px; color: #1A5C30; font-weight: 700; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<!-- ═══ LANDING ═══ -->
+<div class="pg on" id="pgLanding">
+  <nav class="nav">
+    <div class="nav-logo">
+      <div class="nav-mark">S</div>
+      <div>
+        <div class="nav-name">SEFYP</div>
+        <div class="nav-sub">Crédito Nómina PEMEX</div>
+      </div>
+    </div>
+    <button class="nav-btn" id="navBtn" onclick="showForm();return false;">Solicitar ahora →</button>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-exclusivo">🏭 Exclusivo para Jubilados PEMEX</div>
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(46,204,118,0.15);border:1px solid rgba(46,204,118,0.4);border-radius:30px;padding:6px 18px;font-size:13px;font-weight:800;color:#2ECC76;margin-bottom:24px;letter-spacing:0.05em;">
+        ✅ TRÁMITE 100% GRATUITO — Sin vendedores ni cobros anticipados
+      </div>
+      <h1>Tu crédito personal<br><span>vía nómina PEMEX</span></h1>
+      <p class="hero-sub">Aprovecha tu pensión PEMEX para acceder al crédito que mereces. Sin complicaciones, sin aval y con buró flexible.</p>
+      <div class="hero-monto">
+        <div class="hm-label">💰 Préstamos hasta</div>
+        <div class="hm-num">$500,000</div>
+        <div class="hm-sub">pesos mexicanos</div>
+      </div>
+      <br>
+      <button class="hero-btn" id="heroBtn" onclick="showForm();return false;">📋 Iniciar mi solicitud</button>
+      <div class="hero-trust">
+        <div class="trust-item">Descuento vía nómina</div>
+        <div class="trust-item">Buró flexible</div>
+        <div class="trust-item">Sin pagos anticipados</div>
+        <div class="trust-item">Respuesta 24–48 hrs</div>
+      </div>
+      <div style="margin-top:28px;background:rgba(46,204,118,0.12);border:1.5px solid rgba(46,204,118,0.3);border-radius:14px;padding:16px 24px;display:inline-block;max-width:560px;width:100%;">
+        <div style="font-size:15px;font-weight:900;color:#2ECC76;margin-bottom:6px;">🆓 El trámite es completamente GRATIS</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6;font-weight:600;">
+          No tenemos asesores, vendedores ni ninguna persona cobrando por gestionar tu crédito. 
+          Si alguien te pide dinero por tramitar tu solicitud, <strong style="color:#FF6B6B;">NO somos nosotros</strong>. 
+          Denuncia cualquier cobro irregular.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg class="wave" viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="background:var(--azul-mid);display:block">
+    <path d="M0,60 C360,0 1080,80 1440,20 L1440,0 L0,0 Z" fill="#F4F6F9"/>
+  </svg>
+
+  <!-- DOCUMENTOS REQUERIDOS -->
+  <div class="req-section">
+    <div class="sec-tag">📄 Documentos requeridos</div>
+    <h2 class="sec-title">Ten listos estos documentos</h2>
+    <p class="sec-sub">Para agilizar tu trámite, ten a la mano estos documentos. Los enviarás por WhatsApp al finalizar tu solicitud.</p>
+    <div class="docs-grid">
+      <div class="doc-card">
+        <div class="doc-icon-wrap">🪪</div>
+        <div class="doc-content">
+          <div class="doc-num">Documento 1</div>
+          <div class="doc-titulo">INE vigente</div>
+          <div class="doc-desc">Foto del frente y reverso de tu credencial de elector. Que se vea clara y completa.</div>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon-wrap">🧾</div>
+        <div class="doc-content">
+          <div class="doc-num">Documento 2</div>
+          <div class="doc-titulo">5 últimas tirillas de pago</div>
+          <div class="doc-desc">Los 5 recibos de pensión más recientes. Pueden ser fotos claras de cada tirilla.</div>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon-wrap">💡</div>
+        <div class="doc-content">
+          <div class="doc-num">Documento 3</div>
+          <div class="doc-titulo">Comprobante CFE reciente</div>
+          <div class="doc-desc">Recibo de luz (CFE) no mayor a 3 meses de antigüedad. Debe mostrar tu nombre y domicilio.</div>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon-wrap">🏦</div>
+        <div class="doc-content">
+          <div class="doc-num">Documento 4</div>
+          <div class="doc-titulo">Último estado de cuenta</div>
+          <div class="doc-desc">Estado de cuenta del banco donde recibes tu pensión PEMEX. Debe ser el más reciente.</div>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon-wrap">📄</div>
+        <div class="doc-content">
+          <div class="doc-num">Documento 5</div>
+          <div class="doc-titulo">Comprobante RH 2026</div>
+          <div class="doc-desc">Actualización de datos gasolina emitido por Recursos Humanos PEMEX vigente 2026.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIÉN CALIFICA -->
+  <div class="califica-bg">
+    <div class="cal-inner">
+      <div style="background:rgba(46,204,118,0.12);border:1.5px solid rgba(46,204,118,0.3);border-radius:12px;padding:14px 20px;margin-bottom:24px;display:flex;align-items:flex-start;gap:12px;">
+        <span style="font-size:28px;flex-shrink:0;">🆓</span>
+        <div>
+          <div style="font-size:15px;font-weight:900;color:#2ECC76;margin-bottom:4px;">El trámite es 100% GRATUITO</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.75);font-weight:600;line-height:1.5;">No contamos con asesores ni vendedores que cobren por gestionar tu solicitud. Nadie de SEFYP te pedirá dinero para tramitar tu crédito. Si alguien lo hace, <strong style="color:#FF6B6B;">repórtalo de inmediato.</strong></div>
+        </div>
+      </div>
+      <div class="sec-tag" style="background:rgba(91,190,255,0.15);color:var(--celeste)">¿Quién puede solicitar?</div>
+      <h2 class="sec-title" style="color:#fff;margin-bottom:0">Requisitos para calificar</h2>
+      <div class="cal-grid">
+        <div class="cal-card si">
+          <div class="cal-title">✅ SÍ califica</div>
+          <ul class="cal-list">
+            <li><span>✓</span>Jubilado PEMEX activo en nómina</li>
+            <li><span>✓</span>Pensión mayor a $2,500 catorcenales</li>
+            <li><span>✓</span>Menor de 80 años</li>
+            <li><span>✓</span>Cobrar en BBVA, Banorte, Banamex o Santander</li>
+            <li><span>✓</span>Buró de crédito con historial (flexible)</li>
+          </ul>
+        </div>
+        <div class="cal-card no">
+          <div class="cal-title">❌ NO califica</div>
+          <ul class="cal-list">
+            <li><span>✗</span>Pensión menor a $2,500 catorcenales</li>
+            <li><span>✗</span>80 años o más</li>
+            <li><span>✗</span>Cobra en banco no autorizado</li>
+            <li><span>✗</span>No está activo en nómina PEMEX</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROCESO -->
+  <div class="proceso-bg">
+    <div class="proc-inner">
+      <div class="sec-tag">Proceso simple</div>
+      <h2 class="sec-title">¿Cómo funciona?</h2>
+      <div class="pasos">
+        <div class="paso"><div class="paso-num">1</div><h3>Llena tu solicitud</h3><p>Completa el formulario en línea con tus datos básicos.</p></div>
+        <div class="paso"><div class="paso-num">2</div><h3>Envía tus documentos</h3><p>Manda tus 5 documentos por WhatsApp al finalizar.</p></div>
+        <div class="paso"><div class="paso-num">3</div><h3>Revisamos tu expediente</h3><p>Te respondemos en 24 a 48 horas hábiles.</p></div>
+        <div class="paso"><div class="paso-num">4</div><h3>Recibes tu crédito</h3><p>Si calificas, depositamos a tu cuenta bancaria.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-bg">
+    <h2>¿Listo para solicitar<br>tu crédito?</h2>
+    <p>El proceso toma solo 5 minutos. Sin salir de casa.</p>
+    <button class="hero-btn" id="ctaBtn" onclick="showForm();return false;" style="font-size:18px">📋 Iniciar mi solicitud ahora</button>
+    <p class="cta-note">🔒 Tus datos están protegidos y son 100% confidenciales</p>
+  </div>
+
+  <div class="footer">
+    <div class="footer-logo">SEFYP</div>
+    <div class="footer-txt">Crédito Personal Vía Nómina · Exclusivo Jubilados PEMEX<br>© 2026 SEFYP. Todos los derechos reservados.</div>
+  </div>
+
+  <a href="https://wa.me/529934039984?text=Hola%2C%20me%20interesa%20el%20cr%C3%A9dito%20v%C3%ADa%20n%C3%B3mina%20para%20jubilados%20PEMEX" target="_blank" class="wa-float">💬 ¿Necesitas ayuda?</a>
+</div>
+
+<!-- ═══ FORMULARIO ═══ -->
+<div class="pg" id="pgForm">
+  <div class="form-top">
+    <button class="btn-volver" id="btnVolver" onclick="showLanding();return false;">← Regresar</button>
+    <div class="form-logo">SEFYP</div>
+    <div class="form-sub">Crédito Nómina · Jubilados PEMEX</div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-label" id="progLabel">Paso 1 de 3 — Tus datos personales</div>
+    <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:33%"></div></div>
+  </div>
+  <div class="form-wrap">
+
+    <!-- PASO 1 -->
+    <div class="scard on" id="s1">
+      <div class="scard-head"><span class="scard-emo">👤</span><div class="scard-num">Paso 1 de 3</div><div class="scard-tit">Datos personales</div></div>
+      <div class="scard-body">
+        <div class="info-box">✏️ Escribe tus datos tal como aparecen en tu credencial oficial.</div>
+
+        <div class="docs-aviso-form">
+          <div class="daf-title">📋 Ten listos estos documentos — los enviarás al final por WhatsApp:</div>
+          <div class="daf-list">
+            <div class="daf-item"><div class="daf-num">1</div><span>🪪 <strong>INE vigente</strong> — Frente y reverso</span></div>
+            <div class="daf-item"><div class="daf-num">2</div><span>🧾 <strong>5 últimas tirillas de pago</strong></span></div>
+            <div class="daf-item"><div class="daf-num">3</div><span>💡 <strong>Comprobante CFE reciente</strong></span></div>
+            <div class="daf-item"><div class="daf-num">4</div><span>🏦 <strong>Último estado de cuenta</strong> bancario</span></div>
+            <div class="daf-item"><div class="daf-num">5</div><span>📄 <strong>Comprobante RH 2026</strong> — Actualización datos gasolina</span></div>
+          </div>
+        </div>
+
+        <div class="fld"><label>Correo electrónico <span class="req">*</span></label><input type="email" id="f_correo" placeholder="tucorreo@gmail.com"></div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;">
+          <div class="fld" style="margin-bottom:0"><label>Nombre(s) <span class="req">*</span></label><input type="text" id="f_nombre" placeholder="Nombre(s)"></div>
+          <div class="fld" style="margin-bottom:0"><label>Apellido paterno <span class="req">*</span></label><input type="text" id="f_appaterno" placeholder="Apellido paterno"></div>
+          <div class="fld" style="margin-bottom:0"><label>Apellido materno <span class="req">*</span></label><input type="text" id="f_apmaterno" placeholder="Apellido materno"></div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;">
+          <div class="fld" style="margin-bottom:0"><label>Ficha PEMEX <span class="req">*</span></label><input type="text" id="f_ficha" placeholder="Ej. PX-44821"></div>
+          <div class="fld" style="margin-bottom:0"><label>Clave ASISTE <span class="req">*</span></label><input type="text" id="f_asiste" placeholder="Clave ASISTE"></div>
+        </div>
+
+        <div class="fld"><label>Fecha de nacimiento <span class="req">*</span></label><input type="date" id="f_fnac"></div>
+        <div class="fld"><label>Teléfono celular <span class="req">*</span></label><div class="hint">10 dígitos sin espacios</div><input type="tel" id="f_tel" placeholder="9931234567" maxlength="10" inputmode="numeric"></div>
+        <div class="fld"><label>Edad <span class="req">*</span></label>
+          <select id="f_edad">
+            <option value="">— Selecciona —</option>
+            <option value="califica">Menos de 80 años</option>
+            <option value="no">80 años o más</option>
+          </select>
+        </div>
+        <div class="fld"><label>Estado de nacimiento <span class="req">*</span></label>
+          <select id="f_enac">
+            <option value="">— Selecciona —</option>
+            <option>Aguascalientes</option><option>Baja California</option><option>Baja California Sur</option><option>Campeche</option><option>Chiapas</option><option>Chihuahua</option><option>Ciudad de México</option><option>Coahuila</option><option>Colima</option><option>Durango</option><option>Estado de México</option><option>Guanajuato</option><option>Guerrero</option><option>Hidalgo</option><option>Jalisco</option><option>Michoacán</option><option>Morelos</option><option>Nayarit</option><option>Nuevo León</option><option>Oaxaca</option><option>Puebla</option><option>Querétaro</option><option>Quintana Roo</option><option>San Luis Potosí</option><option>Sinaloa</option><option>Sonora</option><option>Tabasco</option><option>Tamaulipas</option><option>Tlaxcala</option><option>Veracruz</option><option>Yucatán</option><option>Zacatecas</option>
+          </select>
+        </div>
+        <div class="fld"><label>Estado civil <span class="req">*</span></label>
+          <select id="f_ecivil" onchange="toggleConyuge(this.value)">
+            <option value="">— Selecciona —</option>
+            <option>Soltero(a)</option><option>Casado(a)</option><option>Unión libre</option><option>Divorciado(a)</option><option>Viudo(a)</option>
+          </select>
+        </div>
+        <div id="conyuge_wrap" style="display:none;background:var(--azul-light);border:2px solid var(--azul);border-radius:12px;padding:16px;margin-bottom:20px;">
+          <div style="font-size:14px;font-weight:800;color:var(--azul);margin-bottom:12px;">💑 Datos del cónyuge</div>
+          <div class="fld"><label>Nombre completo del cónyuge <span class="req">*</span></label><input type="text" id="f_conyuge_nombre" placeholder="Nombre y apellidos del cónyuge"></div>
+          <div class="fld" style="margin-bottom:0"><label>Teléfono celular del cónyuge <span class="req">*</span></label><input type="tel" id="f_conyuge_tel" placeholder="10 dígitos" maxlength="10" inputmode="numeric"></div>
+        </div>
+        <div class="fld"><label>Nivel educativo</label>
+          <select id="f_edu">
+            <option value="">— Selecciona —</option>
+            <option>Primaria</option><option>Secundaria</option><option>Preparatoria / Bachillerato</option><option>Carrera técnica</option><option>Licenciatura</option><option>Posgrado</option>
+          </select>
+        </div>
+        <div class="fld"><label>Tipo de propiedad donde vive</label>
+          <select id="f_prop">
+            <option value="">— Selecciona —</option>
+            <option>Propia (pagada)</option><option>Propia (en crédito)</option><option>Rentada</option><option>Familiar (sin pago)</option>
+          </select>
+        </div>
+        <div class="fld"><label>Banco donde cobra su pensión <span class="req">*</span></label>
+          <select id="f_banco">
+            <option value="">— Selecciona tu banco —</option>
+            <option>BBVA</option><option>Banorte</option><option>Banamex / Citibanamex</option><option>Santander</option><option>HSBC</option><option>Scotiabank</option><option>Inbursa</option><option>Banco Azteca</option><option>BanBajío</option><option>Otro banco</option>
+          </select>
+        </div>
+        <div class="fld"><label>¿Cuánto cobra de pensión catorcenal? <span class="req">*</span></label>
+          <select id="f_pension">
+            <option value="">— Selecciona —</option>
+            <option value="menos">Menos de $2,500</option>
+            <option value="entre">Entre $2,500 y $5,000</option>
+            <option value="mas">Más de $5,000</option>
+          </select>
+        </div>
+        <div class="fld">
+          <label>¿Quién te recomienda con nosotros?</label>
+          <div class="hint">Si alguien te compartió esta solicitud, escribe su nombre. Si llegaste solo, déjalo en blanco.</div>
+          <input type="text" id="f_referido" placeholder="Nombre de quien te recomendó (opcional)">
+        </div>
+
+        <div class="fld">
+          <label>Tipo de crédito que solicitas <span class="req">*</span></label>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+            <div onclick="selTC('nuevo')" id="tc_nuevo" style="display:flex;align-items:center;gap:14px;background:var(--gris);border:2px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;">
+              <div id="dot_nuevo" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;background:#fff;display:flex;align-items:center;justify-content:center;"></div>
+              <div>
+                <div style="font-size:15px;font-weight:800;color:var(--text);">🆕 Crédito Nuevo</div>
+                <div style="font-size:12px;color:var(--muted);margin-top:2px;">Primera vez que solicito un crédito con SEFYP</div>
+              </div>
+            </div>
+            <div onclick="selTC('refi')" id="tc_refi" style="display:flex;align-items:center;gap:14px;background:var(--gris);border:2px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;">
+              <div id="dot_refi" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;background:#fff;display:flex;align-items:center;justify-content:center;"></div>
+              <div>
+                <div style="font-size:15px;font-weight:800;color:var(--text);">🔄 Refinanciamiento</div>
+                <div style="font-size:12px;color:var(--muted);margin-top:2px;">Quiero refinanciar mi crédito actual</div>
+              </div>
+            </div>
+            <div onclick="selTC('segundo')" id="tc_segundo" style="display:flex;align-items:center;gap:14px;background:var(--gris);border:2px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;">
+              <div id="dot_segundo" style="width:22px;height:22px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;background:#fff;display:flex;align-items:center;justify-content:center;"></div>
+              <div>
+                <div style="font-size:15px;font-weight:800;color:var(--text);">➕ Segundo o Tercer Crédito</div>
+                <div style="font-size:12px;color:var(--muted);margin-top:2px;">Ya tengo un crédito activo y quiero uno adicional</div>
+              </div>
+            </div>
+          </div>
+          <input type="hidden" id="f_tipo_credito" value="">
+        </div>
+
+        <div class="nav-btns"><button class="btn-sig" id="sig1" onclick="irA(2);return false;">Siguiente →</button></div>
+      </div>
+    </div>
+
+    <!-- PASO 2 -->
+    <div class="scard" id="s2">
+      <div class="scard-head"><span class="scard-emo">🏠</span><div class="scard-num">Paso 2 de 3</div><div class="scard-tit">Tu domicilio</div></div>
+      <div class="scard-body">
+        <div class="info-box">📍 Escribe exactamente donde vives actualmente.</div>
+        <div class="fld"><label>Calle, número y colonia <span class="req">*</span></label><input type="text" id="f_dir" placeholder="Ej. Calle Pino Suárez No. 123, Col. Centro"></div>
+        <div class="fld"><label>Ciudad / Municipio <span class="req">*</span></label><input type="text" id="f_ciudad" placeholder="Ej. Villahermosa"></div>
+        <div class="fld"><label>Estado <span class="req">*</span></label>
+          <select id="f_estado">
+            <option value="">— Selecciona —</option>
+            <option>Aguascalientes</option><option>Baja California</option><option>Campeche</option><option>Chiapas</option><option>Chihuahua</option><option>Ciudad de México</option><option>Coahuila</option><option>Colima</option><option>Durango</option><option>Estado de México</option><option>Guanajuato</option><option>Guerrero</option><option>Hidalgo</option><option>Jalisco</option><option>Michoacán</option><option>Morelos</option><option>Nayarit</option><option>Nuevo León</option><option>Oaxaca</option><option>Puebla</option><option>Querétaro</option><option>Quintana Roo</option><option>San Luis Potosí</option><option>Sinaloa</option><option>Sonora</option><option>Tabasco</option><option>Tamaulipas</option><option>Tlaxcala</option><option>Veracruz</option><option>Yucatán</option><option>Zacatecas</option>
+          </select>
+        </div>
+        <div class="fld"><label>Código postal <span class="req">*</span></label><input type="text" id="f_cp" placeholder="Ej. 86000" maxlength="5" inputmode="numeric"></div>
+        <div style="margin-top:24px;margin-bottom:4px;">
+          <div style="font-size:15px;font-weight:900;color:var(--azul);margin-bottom:4px;">👥 3 Referencias personales</div>
+          <div style="font-size:13px;color:var(--muted);margin-bottom:16px;font-weight:600;">De preferencia compañeros jubilados PEMEX. Deben poder contestar si les llamamos.</div>
+
+          <div style="background:var(--azul-light);border-radius:12px;padding:16px;margin-bottom:12px;">
+            <div style="font-size:13px;font-weight:800;color:var(--azul);margin-bottom:10px;">👤 Referencia 1 <span class="req">*</span></div>
+            <div class="fld"><label>Nombre completo</label><input type="text" id="rn1" placeholder="Nombre y apellidos"></div>
+            <div class="fld"><label>Teléfono celular</label><input type="tel" id="rt1" placeholder="10 dígitos" maxlength="10" inputmode="numeric"></div>
+            <div class="fld"><label>Parentesco</label>
+              <select id="rp1"><option value="">— Selecciona —</option><option>Compañero jubilado</option><option>Hijo(a)</option><option>Hermano(a)</option><option>Sobrino(a)</option><option>Nieto(a)</option><option>Amigo(a)</option><option>Vecino(a)</option><option>Primo(a)</option><option>Otro</option></select>
+            </div>
+          </div>
+
+          <div style="background:var(--azul-light);border-radius:12px;padding:16px;margin-bottom:12px;">
+            <div style="font-size:13px;font-weight:800;color:var(--azul);margin-bottom:10px;">👤 Referencia 2 <span class="req">*</span></div>
+            <div class="fld"><label>Nombre completo</label><input type="text" id="rn2" placeholder="Nombre y apellidos"></div>
+            <div class="fld"><label>Teléfono celular</label><input type="tel" id="rt2" placeholder="10 dígitos" maxlength="10" inputmode="numeric"></div>
+            <div class="fld"><label>Parentesco</label>
+              <select id="rp2"><option value="">— Selecciona —</option><option>Compañero jubilado</option><option>Hijo(a)</option><option>Hermano(a)</option><option>Sobrino(a)</option><option>Nieto(a)</option><option>Amigo(a)</option><option>Vecino(a)</option><option>Primo(a)</option><option>Otro</option></select>
+            </div>
+          </div>
+
+          <div style="background:var(--azul-light);border-radius:12px;padding:16px;margin-bottom:12px;">
+            <div style="font-size:13px;font-weight:800;color:var(--azul);margin-bottom:10px;">👤 Referencia 3 <span class="req">*</span></div>
+            <div class="fld"><label>Nombre completo</label><input type="text" id="rn3" placeholder="Nombre y apellidos"></div>
+            <div class="fld"><label>Teléfono celular</label><input type="tel" id="rt3" placeholder="10 dígitos" maxlength="10" inputmode="numeric"></div>
+            <div class="fld"><label>Parentesco</label>
+              <select id="rp3"><option value="">— Selecciona —</option><option>Compañero jubilado</option><option>Hijo(a)</option><option>Hermano(a)</option><option>Sobrino(a)</option><option>Nieto(a)</option><option>Amigo(a)</option><option>Vecino(a)</option><option>Primo(a)</option><option>Otro</option></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-btns"><button class="btn-ant" id="ant2" onclick="irA(1);return false;">← Atrás</button><button class="btn-sig" id="sig2" onclick="irA(3);return false;">Siguiente →</button></div>
+      </div>
+    </div>
+
+    <!-- PASO 3 -->
+    <div class="scard" id="s3">
+      <div class="scard-head"><span class="scard-emo">📲</span><div class="scard-num">Paso 3 de 3</div><div class="scard-tit">Confirmar y enviar</div></div>
+      <div class="scard-body">
+        <div class="info-box">🎉 ¡Ya casi terminamos! Revisa tus datos y toca el botón verde.</div>
+        <div class="resumen-box" id="resumen"></div>
+
+        <div class="docs-aviso-form" style="margin-bottom:16px">
+          <div class="daf-title">📲 Al tocar el botón verde se abrirá WhatsApp — adjunta estos documentos:</div>
+          <div class="daf-list">
+            <div class="daf-item"><div class="daf-num">1</div><span>🪪 <strong>INE</strong> — Foto del frente y reverso</span></div>
+            <div class="daf-item"><div class="daf-num">2</div><span>🧾 <strong>5 últimas tirillas de pago</strong></span></div>
+            <div class="daf-item"><div class="daf-num">3</div><span>💡 <strong>Comprobante CFE reciente</strong></span></div>
+            <div class="daf-item"><div class="daf-num">4</div><span>🏦 <strong>Último estado de cuenta</strong> bancario</span></div>
+            <div class="daf-item"><div class="daf-num">5</div><span>📄 <strong>Comprobante RH 2026</strong> — Actualización datos gasolina</span></div>
+          </div>
+          <div style="margin-top:10px;font-size:12px;color:var(--azul);font-weight:700;text-align:center;">💬 Toca el clip 📎 en WhatsApp para adjuntar cada foto</div>
+        </div>
+
+        <div class="chk-item"><input type="checkbox" id="chk1"><label for="chk1">Autorizo a SEFYP a usar mis datos personales para tramitar mi solicitud de crédito.</label></div>
+        <div class="chk-item"><input type="checkbox" id="chk2"><label for="chk2">Confirmo que la información proporcionada es verdadera y me pertenece.</label></div>
+
+        <button class="btn-wa-send" id="btnEnv" onclick="enviarWA();return false;">📲 Enviar mi solicitud por WhatsApp</button>
+        <div class="nav-btns" style="margin-top:12px"><button class="btn-ant" id="ant3" onclick="irA(2);return false;">← Atrás</button></div>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="ok-screen" id="okScreen">
+      <span class="ok-emo">🎉</span>
+      <div class="ok-tit">¡Solicitud enviada!</div>
+      <p class="ok-sub">Se abrió WhatsApp con tus datos. Recuerda adjuntar los 5 documentos en ese mismo chat.</p>
+      <div class="folio-box"><div class="folio-lbl">Tu número de folio es</div><div class="folio-num" id="folioNum">PM00000</div></div>
+      <div class="ok-wa-aviso">
+        ⚠️ <strong>Acción requerida:</strong><br>
+        Ve a WhatsApp y adjunta:<br>
+        🪪 INE (frente y reverso) · 🧾 5 tirillas · 💡 CFE · 🏦 Estado de cuenta · 📄 RH 2026
+      </div>
+      <div class="ok-steps">
+        ¿Qué sigue?<br>
+        1️⃣ Envía tus documentos por WhatsApp<br>
+        2️⃣ Revisamos tu expediente en 24–48 hrs<br>
+        3️⃣ Te contactamos con el resultado<br>
+        4️⃣ Si calificas, ¡recibes tu crédito!
+      </div>
+    </div>
+
+  </div>
+  <a href="https://wa.me/529934039984?text=Hola%2C%20necesito%20ayuda%20con%20mi%20solicitud%20SEFYP" target="_blank" class="wa-float">💬 ¿Necesitas ayuda?</a>
+</div>
+
+<script>
+const WA_NUM = '529934039984';
+let paso = 1;
+
+window.selTC = function(tipo) {
+  document.getElementById('f_tipo_credito').value = tipo;
+  ['nuevo','refi','segundo'].forEach(function(t) {
+    const card = document.getElementById('tc_'+t);
+    const dot = document.getElementById('dot_'+t);
+    if(t === tipo) {
+      card.style.borderColor = 'var(--azul)';
+      card.style.background = 'var(--azul-light)';
+      dot.style.borderColor = 'var(--azul)';
+      dot.style.background = 'var(--azul)';
+      dot.innerHTML = '<span style="color:#fff;font-size:12px;font-weight:900;">✓</span>';
+    } else {
+      card.style.borderColor = 'var(--border)';
+      card.style.background = 'var(--gris)';
+      dot.style.borderColor = 'var(--border)';
+      dot.style.background = '#fff';
+      dot.innerHTML = '';
+    }
+  });
+};
+
+window.toggleConyuge = function(val) {
+  const wrap = document.getElementById('conyuge_wrap');
+  if(!wrap) return;
+  if(val === 'Casado(a)' || val === 'Unión libre') {
+    wrap.style.display = 'block';
+  } else {
+    wrap.style.display = 'none';
+    const n = document.getElementById('f_conyuge_nombre');
+    const t = document.getElementById('f_conyuge_tel');
+    if(n) n.value = '';
+    if(t) t.value = '';
+  }
+};
+
+window.showForm = function() {
+  document.getElementById('pgLanding').classList.remove('on');
+  document.getElementById('pgForm').classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+window.showLanding = function() {
+  document.getElementById('pgForm').classList.remove('on');
+  document.getElementById('pgLanding').classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+
+window.irA = function(n) {
+  if(n > paso && !validar(paso)) return;
+  document.getElementById('s'+paso).classList.remove('on');
+  paso = n;
+  document.getElementById('s'+n).classList.add('on');
+  const labels = ['','Tus datos personales','Tu domicilio','Confirmar y enviar'];
+  document.getElementById('progLabel').textContent = 'Paso '+n+' de 3 — '+labels[n];
+  document.getElementById('progFill').style.width = (n*33.33)+'%';
+  if(n===3) mostrarResumen();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+
+function validar(p) {
+  if(p===1) {
+    if(!document.getElementById('f_tipo_credito').value){
+      alert('⚠️ Por favor selecciona el tipo de crédito que solicitas');return false;
+    }
+    const req = [['f_nombre','Nombre(s)'],['f_appaterno','Apellido paterno'],['f_apmaterno','Apellido materno'],['f_correo','Correo electrónico'],['f_tel','Teléfono celular'],['f_fnac','Fecha de nacimiento'],['f_ficha','Ficha PEMEX'],['f_asiste','Clave ASISTE'],['f_enac','Estado de nacimiento'],['f_ecivil','Estado civil'],['f_banco','Banco'],['f_pension','Pensión catorcenal'],['f_edad','Edad']];
+    for(const[id,lbl] of req){
+      const el = document.getElementById(id);
+      if(!el||!el.value.trim()){alert('⚠️ Por favor completa: '+lbl);el&&el.focus();return false;}
+    }
+    const pension = document.getElementById('f_pension').value;
+    const edad = document.getElementById('f_edad').value;
+    if(pension === 'menos'){
+      alert('Lo sentimos, para este crédito se requiere una pensión mínima de $2,500 catorcenales.\n\nUn asesor puede orientarte sobre otras opciones.');
+      return false;
+    }
+    if(edad === 'no'){
+      alert('Lo sentimos, este crédito aplica para jubilados menores de 80 años.\n\nUn asesor puede orientarte sobre otras opciones.');
+      return false;
+    }
+    return true;
+  }
+  if(p===2) {
+    const req = [['f_dir','Dirección'],['f_ciudad','Ciudad'],['f_estado','Estado'],['f_cp','Código postal']];
+    for(const[id,lbl] of req){
+      const el = document.getElementById(id);
+      if(!el||!el.value.trim()){alert('⚠️ Por favor completa: '+lbl);el&&el.focus();return false;}
+    }
+    return true;
+  }
+  return true;
+}
+
+function g(id){const e=document.getElementById(id);return e?e.value.trim():'';}
+
+function mostrarResumen(){
+  document.getElementById('resumen').innerHTML =
+    '<strong>👤 Nombre:</strong> '+g('f_nombre')+'<br>'+
+    '<strong>📱 Teléfono:</strong> '+g('f_tel')+'<br>'+
+    '<strong>📧 Correo:</strong> '+g('f_correo')+'<br>'+
+    '<strong>🏦 Banco:</strong> '+g('f_banco')+'<br>'+
+    '<strong>📍 Ciudad:</strong> '+g('f_ciudad')+', '+g('f_estado')+'<br>'+
+    '<strong>🪪 Ficha:</strong> '+g('f_ficha')+' | <strong>ASISTE:</strong> '+g('f_asiste')+'<br>'+    '<strong>📅 Nacimiento:</strong> '+g('f_fnac')+' | <strong>Estado civil:</strong> '+g('f_ecivil')+'<br>'+    '<strong>🏦 Banco:</strong> '+g('f_banco')+'<br>'+    (g('f_referido') ? '<strong>🤝 Referido por:</strong> '+g('f_referido') : '');
+}
+
+window.enviarWA = function() {
+  if(!document.getElementById('chk1').checked||!document.getElementById('chk2').checked){
+    alert('⚠️ Por favor marca las dos casillas antes de enviar.');return;
+  }
+  const folio = 'PM'+Math.floor(Math.random()*90000+10000);
+  const pensionMap = {menos:'Menos de $2,500',entre:'$2,500 a $5,000',mas:'Más de $5,000'};
+  const edadMap = {califica:'Menos de 80 años',no:'80 años o más'};
+  const msg =
+    '🏦 *SOLICITUD CRÉDITO NÓMINA SEFYP*\n'+
+    '📋 Folio: *'+folio+'*\n'+
+    '🏭 Producto: Crédito Vía Nómina · Jubilado PEMEX\n'+    '📋 Tipo: '+({'nuevo':'🆕 Crédito Nuevo','refi':'🔄 Refinanciamiento','segundo':'➕ Segundo o Tercer Crédito'}[g('f_tipo_credito')]||'No especificado')+'\n\n'+    '📋 Tipo de crédito: '+({'nuevo':'Crédito Nuevo','refi':'Refinanciamiento','segundo':'Segundo o Tercer Crédito'}[g('f_tipo_credito')]||'No especificado')+'\n\n'+
+    '👤 *DATOS PERSONALES*\n'+
+    '• Nombre: '+g('f_nombre')+' '+g('f_appaterno')+' '+g('f_apmaterno')+'\n'+
+    '• Fecha nac.: '+g('f_fnac')+'\n'+    '• Teléfono: '+g('f_tel')+'\n'+    '• Edo. nacimiento: '+g('f_enac')+'\n'+    '• Estado civil: '+g('f_ecivil')+'\n'+    (g('f_conyuge_nombre') ? '• Cónyuge: '+g('f_conyuge_nombre')+' | Tel: '+g('f_conyuge_tel')+'\n' : '')+    '• Nivel educativo: '+g('f_edu')+'\n'+    '• Tipo propiedad: '+g('f_prop')+'\n'+
+    '• Correo: '+g('f_correo')+'\n'+
+    '• Ficha PEMEX: '+g('f_ficha')+'\n'+
+    '• Clave ASISTE: '+g('f_asiste')+'\n'+
+    '• Banco: '+g('f_banco')+'\n'+
+    '• Pensión catorcenal: '+(pensionMap[g('f_pension')]||g('f_pension'))+'\n'+
+    '• Edad: '+(edadMap[g('f_edad')]||g('f_edad'))+'\n\n'+
+    '🏠 *DOMICILIO*\n'+
+    '• Dirección: '+g('f_dir')+'\n'+
+    '• Ciudad: '+g('f_ciudad')+'\n'+
+    '• Estado: '+g('f_estado')+'\n'+
+    '• C.P.: '+g('f_cp')+'\n\n'+
+    '📸 *DOCUMENTOS A ENVIAR EN ESTE CHAT:*\n'+
+    '1️⃣ INE (frente y reverso)\n'+
+    '2️⃣ 5 últimas tirillas de pago\n'+
+    '3️⃣ Comprobante CFE reciente\n'+
+    '4️⃣ Último estado de cuenta bancario\n'+
+    '5️⃣ Comprobante RH 2026 (actualización datos gasolina)\n\n'+
+    '👥 *REFERENCIAS PERSONALES*\n'+    '1. '+g('rn1')+' | '+g('rt1')+' | '+g('rp1')+'\n'+    '2. '+g('rn2')+' | '+g('rt2')+' | '+g('rp2')+'\n'+    '3. '+g('rn3')+' | '+g('rt3')+' | '+g('rp3')+'\n\n'+    (g('f_referido') ? '🤝 *Referido por:* '+g('f_referido')+'\n\n' : '')+    '✅ Autoriza uso de datos para trámite.\n'+
+    '📅 '+new Date().toLocaleString('es-MX');
+
+  window.open('https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(msg), '_blank');
+  document.getElementById('s3').classList.remove('on');
+  document.getElementById('okScreen').classList.add('on');
+  document.getElementById('folioNum').textContent = folio;
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+</script>
+</body>
+</html>
